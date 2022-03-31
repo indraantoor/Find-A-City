@@ -37,9 +37,15 @@ const SearchInput = styled.input`
   font-size: 18px;
   font-weight: 600;
   background-color: #fffffc;
+  transition: border 0.6s ease-in;
 
   &:focus {
     outline: none !important;
+    // border: solid 1px #757780;
+  }
+
+  &:hover {
+    border: solid 1px #757780;
   }
 `;
 
@@ -79,6 +85,7 @@ const SearchForm = () => {
           type="text"
           placeholder="Search for a city..."
           onChange={handleChange}
+          autoFocus
         />
       </SearchFormContainer>
       {searchText.length > 0 && <ResultsList />}

@@ -21,12 +21,19 @@ const ResultsListContainer = styled.div`
 
   //   box-shadow: 0 0 10px #dadad9;
   box-shadow: 0 0 6px #757780;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const ResultsList = () => {
   return (
     <ResultsListWrapper>
       <ResultsListContainer>
+        <Result />
+        <Result />
+        <Result />
         <Result />
         <Result />
         <Result />
