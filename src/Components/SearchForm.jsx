@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ResultsList from "./ResultsList";
+import { data } from "../dummyData";
 
 const SearchContainer = styled.div`
   margin-top: 100px;
@@ -53,24 +54,28 @@ const accessToken =
   "pk.eyJ1IjoiZ2Vibzk2IiwiYSI6ImNrcThnd2o3czAxenUyb3Ftcm5ycWRyNm4ifQ.UcZ74o-OQBOQikUVDNk7.";
 
 const SearchForm = () => {
-  const [cities, setCities] = useState({});
+  const [places, setPlaces] = useState({});
   const [searchText, setSearchText] = useState("");
 
-  useEffect(() => {
-    const fetchPlaces = async () => {
-      try {
-        const response = await fetch(
-          `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchText}.json?access_token=${accessToken}`
-        );
-        const json = await response.json();
-        console.log(json);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchPlaces = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchText}.json?access_token=${accessToken}`
+  //       );
+  //       const json = await response.json();
+  //       console.log(json);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
 
-    fetchPlaces();
-  }, [searchText]);
+  useEffect(() => {
+    setPlaces(data);
+  }, [places]);
+
+  //   fetchPlaces();
+  // }, [searchText]);
 
   const handleChange = (e) => {
     const updatedSearchText = e.target.value;
@@ -88,7 +93,7 @@ const SearchForm = () => {
           autoFocus
         />
       </SearchFormContainer>
-      {searchText.length > 0 && <ResultsList />}
+      {searchText.length > 0 && <ResultsList places={places} />}
     </SearchContainer>
   );
 };

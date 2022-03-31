@@ -12,7 +12,7 @@ const ResultsListContainer = styled.div`
   //   background-color: orange;
   width: 50%;
   padding: 5px;
-  height: 250px;
+  max-height: 250px;
   overflow: auto;
 
   //   border: solid 3px #ede6e3;
@@ -27,18 +27,16 @@ const ResultsListContainer = styled.div`
   }
 `;
 
-const ResultsList = () => {
+const ResultsList = ({ places }) => {
+  console.log(places);
   return (
     <ResultsListWrapper>
       <ResultsListContainer>
-        <Result />
-        <Result />
-        <Result />
-        <Result />
-        <Result />
-        <Result />
-        <Result />
-        <Result />
+        {places.features &&
+          places.features.length > 0 &&
+          places.features.map((place) => (
+            <Result key={place.id} name={place["place_name"]} />
+          ))}
       </ResultsListContainer>
     </ResultsListWrapper>
   );

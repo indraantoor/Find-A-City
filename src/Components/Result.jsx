@@ -10,7 +10,8 @@ const ResultContainer = styled.div`
   border-radius: 5px;
 
   &:hover {
-    background-color: #98ce00;
+    // background-color: #98ce00;
+    background-color: #dadad9;
     cursor: pointer;
   }
 
@@ -39,14 +40,14 @@ const InfoContainer = styled.div`
   align-items: center;
 `;
 
-const Result = () => {
+const Result = ({ name }) => {
   return (
     <ResultContainer>
       <InfoContainer>
         <div>
-          <i class="bi bi-geo-alt-fill"></i>
+          <i className="bi bi-geo-alt-fill"></i>
         </div>
-        <ResultText>Result</ResultText>
+        <ResultText>{name}</ResultText>
       </InfoContainer>
       <BreakPoint />
     </ResultContainer>
