@@ -2,19 +2,19 @@ import styled from "styled-components";
 import Result from "./Result";
 
 const ResultsListWrapper = styled.div`
-  //   background-color: green;
-  padding-top: 5px;
+  // background-color: green;
+  padding-top: 10px;
   display: flex;
   justify-content: center;
 `;
 
 const ResultsListContainer = styled.div`
-  //   background-color: orange;
+  background-color: #fffff3;
   width: 50%;
-  padding: 5px;
+  padding: 10px;
   max-height: 250px;
   overflow: auto;
-
+  // transition: height 2s ease-in;
   //   border: solid 3px #ede6e3;
   border: none;
   border-radius: 10px;

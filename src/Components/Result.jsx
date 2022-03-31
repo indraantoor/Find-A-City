@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const ResultContainer = styled.div`
-  //   background-color: brown;
+  // background-color: brown;
   padding-left: 8px;
   padding-right: 8px;
   padding-top: 8px;
@@ -13,6 +13,10 @@ const ResultContainer = styled.div`
     // background-color: #98ce00;
     background-color: #dadad9;
     cursor: pointer;
+  }
+
+  &:active {
+    background-color: #00d9c0;
   }
 
   p {
@@ -44,7 +48,7 @@ const Result = ({ name }) => {
   return (
     <ResultContainer>
       <InfoContainer>
-        <div>
+        <div style={{ color: "black" }}>
           <i className="bi bi-geo-alt-fill"></i>
         </div>
         <ResultText>{name}</ResultText>
