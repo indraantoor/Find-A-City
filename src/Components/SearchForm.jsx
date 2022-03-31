@@ -1,11 +1,14 @@
 import styled from "styled-components";
+import ResultsList from "./ResultsList";
 
 const SearchContainer = styled.div`
   margin-top: 100px;
+  //   background-color: yellow;
+  padding: 20px;
 `;
 
 const Title = styled.h1`
-  background-color: red;
+  //   background-color: red;
   color: #36382e;
   text-align: center;
   padding: 10px;
@@ -13,7 +16,7 @@ const Title = styled.h1`
 `;
 
 const SearchFormContainer = styled.div`
-  background-color: purple;
+  //   background-color: purple;
   display: flex;
   padding: 10px;
 `;
@@ -40,6 +43,7 @@ const SearchForm = () => {
       <SearchFormContainer>
         <SearchInput type="text" placeholder="Search for a city..." />
       </SearchFormContainer>
+      <ResultsList />
     </SearchContainer>
   );
 };
