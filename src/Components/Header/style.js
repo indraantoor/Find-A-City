@@ -5,7 +5,6 @@ export const HeaderContainer = styled.div`
   height: 60px;
   color: white;
   display: flex;
-  // justify-content: center;
   align-items: center;
 `;
 
