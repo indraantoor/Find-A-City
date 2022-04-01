@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const ResultContainer = styled.div`
-  // background-color: brown;
   padding-left: 8px;
   padding-right: 8px;
   padding-top: 8px;
@@ -27,7 +26,6 @@ export const ResultContainer = styled.div`
 `;
 
 export const InfoContainer = styled.div`
-  // background-color: blue;
   display: flex;
   align-items: center;
 `;
