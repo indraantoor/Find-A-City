@@ -46,10 +46,11 @@ const getPlaces = (debouncedSearchText, setFn) => {
   if (debouncedSearchText.length > 0 && debouncedSearchText) {
     if (cancelled) return;
     fetchPlaces(debouncedSearchText).then((results) => {
-      setFn((prevData) => ({
-        ...prevData,
-        ...results,
-      }));
+      // setFn((prevData) => ({
+      //   ...prevData,
+      //   ...results,
+      // }));
+      setFn(results);
     });
   }
 
@@ -59,11 +60,10 @@ const getPlaces = (debouncedSearchText, setFn) => {
 };
 
 const SearchForm = () => {
-  const [places, setPlaces] = useState({});
-  const [searchText, setSearchText] = useState("");
-  const debouncedSearchText = useDebounce(searchText, 180);
-
-  const [state, dispatch] = useReducer(reducer, initialState);
+  // const [places, setPlaces] = useState({});
+  // const [searchText, setSearchText] = useState("");
+  const [searchFormState, dispatch] = useReducer(reducer, initialState);
+  const debouncedSearchText = useDebounce(searchFormState.searchText, 180);
 
   const placesSet = (data) => {
     dispatch({
@@ -73,12 +73,12 @@ const SearchForm = () => {
   };
 
   useEffect(() => {
-    getPlaces(debouncedSearchText, setPlaces);
+    getPlaces(debouncedSearchText, placesSet);
   }, [debouncedSearchText]);
 
-  useEffect(() => {
-    placesSet(places);
-  }, [places]);
+  // useEffect(() => {
+  //   placesSet(places);
+  // }, [places]);
 
   const setText = (searchText) => {
     dispatch({
@@ -95,18 +95,25 @@ const SearchForm = () => {
 
   const handleChange = (e) => {
     const updatedSearchText = e.target.value;
-    setSearchText(updatedSearchText);
+    // setSearchText(updatedSearchText);
     setText(updatedSearchText);
   };
 
   const handleClick = (e) => {
     // Clear Textbox
-    const updatedSearchText = "";
-    setSearchText(updatedSearchText);
+    // const updatedSearchText = "";
+    // setSearchText(updatedSearchText);
     clearText();
   };
 
-  console.log(state);
+  console.log(searchFormState);
+
+  const isValidResult =
+    searchFormState.searchText.length > 0 &&
+    searchFormState.places.features &&
+    searchFormState.places.features.length > 0
+      ? true
+      : false;
 
   return (
     <SearchContainer>
@@ -117,19 +124,15 @@ const SearchForm = () => {
           placeholder="Search for a city..."
           onChange={handleChange}
           autoFocus
-          value={searchText}
+          value={searchFormState.searchText}
         />
-        {searchText.length > 0 ? (
+        {searchFormState.searchText.length > 0 ? (
           <ClearIcon onClick={handleClick} />
         ) : (
           <SearchIcon />
         )}
       </SearchFormContainer>
-      {searchText.length > 0 &&
-        places.features &&
-        places.features.length > 0 && (
-          <ResultsList places={places} setSearchText={setSearchText} />
-        )}
+      {isValidResult && <ResultsList places={searchFormState.places} />}
     </SearchContainer>
   );
 };
