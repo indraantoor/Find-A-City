@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ResultContainer = styled.div`
+export const ResultContainer = styled.div`
   // background-color: brown;
   padding-left: 8px;
   padding-right: 8px;
@@ -26,36 +26,20 @@ const ResultContainer = styled.div`
   }
 `;
 
-const ResultText = styled.p`
+export const InfoContainer = styled.div`
+  // background-color: blue;
+  display: flex;
+  align-items: center;
+`;
+
+export const ResultText = styled.p`
   font-size: 18px;
   font-weight: 500;
   color: #001011;
   margin-left: 10px;
 `;
 
-const BreakPoint = styled.hr`
+export const BreakPoint = styled.hr`
   margin-top: 8px;
   opacity: 0.3;
 `;
-
-const InfoContainer = styled.div`
-  // background-color: blue;
-  display: flex;
-  align-items: center;
-`;
-
-const Result = ({ name }) => {
-  return (
-    <ResultContainer>
-      <InfoContainer>
-        <div style={{ color: "black" }}>
-          <i className="bi bi-geo-alt-fill"></i>
-        </div>
-        <ResultText>{name}</ResultText>
-      </InfoContainer>
-      <BreakPoint />
-    </ResultContainer>
-  );
-};
-
-export default Result;
