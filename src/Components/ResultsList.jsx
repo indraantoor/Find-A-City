@@ -27,16 +27,17 @@ const ResultsListContainer = styled.div`
   }
 `;
 
+const getResult = (place) => (
+  <Result key={place.id} name={place["place_name"]} />
+);
+
 const ResultsList = ({ places }) => {
-  // console.log(places);
   return (
     <ResultsListWrapper>
       <ResultsListContainer>
         {places.features &&
           places.features.length > 0 &&
-          places.features.map((place) => (
-            <Result key={place.id} name={place["place_name"]} />
-          ))}
+          places.features.map((place) => getResult(place))}
       </ResultsListContainer>
     </ResultsListWrapper>
   );
