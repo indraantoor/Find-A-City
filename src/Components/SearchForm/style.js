@@ -11,6 +11,11 @@ export const Title = styled.h1`
   font-weight: 800;
   font-size: 52px;
   padding-left: 24.4%;
+
+  @media (max-width: 692px) {
+    text-align: center;
+    padding-left: 0px;
+  }
 `;
 
 export const SearchFormContainer = styled.form`
@@ -26,6 +31,10 @@ export const SearchFormContainer = styled.form`
   &:hover {
     box-shadow: 0 0 6px #757780;
     border: none;
+  }
+
+  @media (max-width: 718px) {
+    width: 90%;
   }
 `;
 

@@ -19,4 +19,8 @@ export const ResultsListContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+
+  @media (max-width: 718px) {
+    width: 90%;
+  }
 `;
