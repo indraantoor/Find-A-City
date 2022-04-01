@@ -4,6 +4,7 @@ import ResultsList from "./ResultsList";
 import SearchIcon from "../Assets/SearchIcon";
 import ClearIcon from "../Assets/ClearIcon";
 import { fetchPlaces } from "../requests";
+import { useDebounce } from "../Helpers/useDebounce";
 
 const SearchContainer = styled.div`
   margin-top: 30px;
@@ -66,20 +67,6 @@ const SearchInput = styled.input`
     // border: solid 1px #757780;
   }
 `;
-
-function useDebounce(value, delay) {
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [value, delay]);
-  return debouncedValue;
-}
 
 const SearchForm = () => {
   const [places, setPlaces] = useState({});
