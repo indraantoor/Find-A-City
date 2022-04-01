@@ -73,32 +73,45 @@ const IconStyle = {
   color: "#030301",
 };
 
-const accessToken =
-  "pk.eyJ1IjoiZ2Vibzk2IiwiYSI6ImNrcThnd2o3czAxenUyb3Ftcm5ycWRyNm4ifQ.UcZ74o-OQBOQikUVDNk7.";
+const accessToken = process.env.REACT_APP_ACCESS_TOKEN;
 
 const SearchForm = () => {
   const [places, setPlaces] = useState({});
   const [searchText, setSearchText] = useState("");
 
-  // useEffect(() => {
-  //   const fetchPlaces = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchText}.json?access_token=${accessToken}`
-  //       );
-  //       const json = await response.json();
-  //       console.log(json);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
   useEffect(() => {
-    setPlaces(data);
-  }, [places]);
+    let cancelled = false;
 
-  //   fetchPlaces();
-  // }, [searchText]);
+    const fetchPlaces = async () => {
+      try {
+        const response = await fetch(
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchText}.json?access_token=${accessToken}`
+        );
+        const json = await response.json();
+        setPlaces((prevData) => ({
+          ...prevData,
+          ...json,
+        }));
+        // setPlaces(json);
+        console.log(json);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    if (searchText.length > 0) {
+      if (cancelled) return;
+      fetchPlaces();
+    }
+
+    return () => {
+      cancelled = true;
+    };
+  }, [searchText]);
+
+  // useEffect(() => {
+  //   setPlaces(data);
+  // }, [places]);
 
   const handleChange = (e) => {
     const updatedSearchText = e.target.value;
@@ -132,7 +145,9 @@ const SearchForm = () => {
           <i style={IconStyle} className="bi bi-search" />
         )}
       </SearchFormContainer>
-      {searchText.length > 0 && <ResultsList places={places} />}
+      {searchText.length > 0 &&
+        places.features &&
+        places.features.length > 0 && <ResultsList places={places} />}
     </SearchContainer>
   );
 };

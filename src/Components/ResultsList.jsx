@@ -28,7 +28,7 @@ const ResultsListContainer = styled.div`
 `;
 
 const ResultsList = ({ places }) => {
-  console.log(places);
+  // console.log(places);
   return (
     <ResultsListWrapper>
       <ResultsListContainer>
