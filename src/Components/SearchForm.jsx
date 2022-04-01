@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ResultsList from "./ResultsList";
-import { data } from "../dummyData";
+import SearchIcon from "../Assets/SearchIcon";
+import ClearIcon from "../Assets/ClearIcon";
+import { fetchPlaces } from "../requests";
 
 const SearchContainer = styled.div`
   margin-top: 30px;
@@ -65,54 +67,19 @@ const SearchInput = styled.input`
   }
 `;
 
-const IconStyle = {
-  fontSize: "24px",
-  // backgroundColor: "blue",
-  padding: "4px",
-  cursor: "pointer",
-  color: "#030301",
-};
-
 function useDebounce(value, delay) {
-  // State and setters for debounced value
   const [debouncedValue, setDebouncedValue] = useState(value);
-  useEffect(
-    () => {
-      // Update debounced value after delay
-      const handler = setTimeout(() => {
-        setDebouncedValue(value);
-      }, delay);
-      // Cancel the timeout if value changes (also on delay change or unmount)
-      // This is how we prevent debounced value from updating if value is changed ...
-      // .. within the delay period. Timeout gets cleared and restarted.
-      return () => {
-        clearTimeout(handler);
-      };
-    },
-    [value, delay] // Only re-call effect if value or delay changes
-  );
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
   return debouncedValue;
 }
-
-const fetchPlaces = async (searchText) => {
-  try {
-    const response = await fetch(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchText}.json?access_token=${accessToken}`
-    );
-    const json = await response.json();
-    // setPlaces((prevData) => ({
-    //   ...prevData,
-    //   ...json,
-    // }));
-    // setPlaces(json);
-    console.log(json);
-    return json;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const accessToken = process.env.REACT_APP_ACCESS_TOKEN;
 
 const SearchForm = () => {
   const [places, setPlaces] = useState({});
@@ -130,17 +97,12 @@ const SearchForm = () => {
           ...results,
         }));
       });
-      // console.log(fetchPlaces());
     }
 
     return () => {
       cancelled = true;
     };
   }, [debouncedSearchText]);
-
-  // useEffect(() => {
-  //   setPlaces(data);
-  // }, [places]);
 
   const handleChange = (e) => {
     const updatedSearchText = e.target.value;
@@ -165,13 +127,9 @@ const SearchForm = () => {
           value={searchText}
         />
         {searchText.length > 0 ? (
-          <i
-            style={IconStyle}
-            className="bi bi-x-circle"
-            onClick={handleClick}
-          />
+          <ClearIcon onClick={handleClick} />
         ) : (
-          <i style={IconStyle} className="bi bi-search" />
+          <SearchIcon />
         )}
       </SearchFormContainer>
       {searchText.length > 0 &&
