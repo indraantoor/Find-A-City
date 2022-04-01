@@ -9,7 +9,6 @@ export const ResultContainer = styled.div`
   border-radius: 5px;
 
   &:hover {
-    // background-color: #98ce00;
     background-color: #dadad9;
     cursor: pointer;
   }

@@ -6,7 +6,7 @@ export const SearchContainer = styled.div`
 `;
 
 export const Title = styled.h1`
-  color: #001011;
+  color: #fffff3;
   padding: 10px;
   font-weight: 800;
   font-size: 52px;
