@@ -69,7 +69,7 @@ const SearchForm = () => {
           <SearchIcon />
         )}
       </SearchFormContainer>
-      {isValidResult && <ResultsList places={searchFormState.places} />}
+      {isValidResult && <ResultsList />}
     </SearchContainer>
   );
 };

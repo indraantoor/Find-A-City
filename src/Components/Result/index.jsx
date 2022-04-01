@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import LocationIcon from "../../Assets/LocationIcon";
 import { SearchFormContext } from "../../SearchFormContext";
 import {
   ResultContainer,
@@ -17,9 +18,7 @@ const Result = ({ name }) => {
   return (
     <ResultContainer onClick={handleClick}>
       <InfoContainer>
-        <div style={{ color: "black" }}>
-          <i className="bi bi-geo-alt-fill"></i>
-        </div>
+        <LocationIcon />
         <ResultText>{name}</ResultText>
       </InfoContainer>
       <BreakPoint />
