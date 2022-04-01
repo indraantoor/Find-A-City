@@ -9,6 +9,6 @@ export const HeaderContainer = styled.div`
 `;
 
 export const LogoText = styled.h1`
-  margin-left: 40px;
+  margin-left: 10px;
   cursor: pointer;
 `;
