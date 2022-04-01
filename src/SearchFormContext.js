@@ -44,7 +44,7 @@ export const SearchFormProvider = ({ children }) => {
     [dispatch]
   );
 
-  const setText = useCallback(
+  const searchTextSet = useCallback(
     (searchText) => {
       dispatch({
         type: SET_SEARCH_TEXT,
@@ -57,10 +57,10 @@ export const SearchFormProvider = ({ children }) => {
   );
 
   const clearText = useCallback(() => {
-    setText("");
-  }, [setText]);
+    searchTextSet("");
+  }, [searchTextSet]);
 
-  const value = { searchFormState, placesSet, setText, clearText };
+  const value = { searchFormState, placesSet, searchTextSet, clearText };
 
   return (
     <SearchFormContext.Provider value={value}>

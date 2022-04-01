@@ -8,10 +8,10 @@ import {
 } from "./style";
 
 const Result = ({ name }) => {
-  const { setText } = useContext(SearchFormContext);
+  const { searchTextSet } = useContext(SearchFormContext);
 
   const handleClick = () => {
-    setText(name);
+    searchTextSet(name);
   };
 
   return (
