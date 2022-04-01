@@ -1,6 +1,6 @@
 # Find City - Search Engine
 
-<img src="https://i.ibb.co/tzHktd0/city-finder.png" alt="1" border="0" />
+<img src="https://i.ibb.co/FhKR5fw/city-finder-preview.png" alt="1" border="0" />
 
 ## How To Setup?
 
