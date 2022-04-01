@@ -69,7 +69,9 @@ const SearchForm = () => {
       </SearchFormContainer>
       {searchText.length > 0 &&
         places.features &&
-        places.features.length > 0 && <ResultsList places={places} />}
+        places.features.length > 0 && (
+          <ResultsList places={places} setSearchText={setSearchText} />
+        )}
     </SearchContainer>
   );
 };

@@ -5,9 +5,13 @@ import {
   ResultText,
 } from "./style";
 
-const Result = ({ name }) => {
+const Result = ({ name, setSearchText }) => {
+  const handleClick = () => {
+    setSearchText(name);
+  };
+
   return (
-    <ResultContainer>
+    <ResultContainer onClick={handleClick}>
       <InfoContainer>
         <div style={{ color: "black" }}>
           <i className="bi bi-geo-alt-fill"></i>
