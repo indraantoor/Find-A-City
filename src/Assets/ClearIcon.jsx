@@ -5,8 +5,8 @@ const IconStyle = {
   color: "#030301",
 };
 
-const ClearIcon = () => {
-  return <i style={IconStyle} className="bi bi-x-circle" />;
+const ClearIcon = ({ onClick }) => {
+  return <i style={IconStyle} className="bi bi-x-circle" onClick={onClick} />;
 };
 
 export default ClearIcon;
