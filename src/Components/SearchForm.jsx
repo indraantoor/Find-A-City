@@ -68,28 +68,33 @@ const SearchInput = styled.input`
   }
 `;
 
+const getPlaces = (debouncedSearchText, setFn) => {
+  let cancelled = false;
+
+  if (debouncedSearchText.length > 0 && debouncedSearchText) {
+    if (cancelled) return;
+    fetchPlaces(debouncedSearchText).then((results) => {
+      setFn((prevData) => ({
+        ...prevData,
+        ...results,
+      }));
+    });
+  }
+
+  return () => {
+    cancelled = true;
+  };
+};
+
 const SearchForm = () => {
   const [places, setPlaces] = useState({});
   const [searchText, setSearchText] = useState("");
   const debouncedSearchText = useDebounce(searchText, 180);
 
-  useEffect(() => {
-    let cancelled = false;
-
-    if (debouncedSearchText.length > 0 && debouncedSearchText) {
-      if (cancelled) return;
-      fetchPlaces(debouncedSearchText).then((results) => {
-        setPlaces((prevData) => ({
-          ...prevData,
-          ...results,
-        }));
-      });
-    }
-
-    return () => {
-      cancelled = true;
-    };
-  }, [debouncedSearchText]);
+  useEffect(
+    () => getPlaces(debouncedSearchText, setPlaces),
+    [debouncedSearchText]
+  );
 
   const handleChange = (e) => {
     const updatedSearchText = e.target.value;
