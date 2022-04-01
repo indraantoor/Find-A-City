@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { SearchFormContext } from "../../SearchFormContext";
 import {
   ResultContainer,
   InfoContainer,
@@ -5,9 +7,11 @@ import {
   ResultText,
 } from "./style";
 
-const Result = ({ name, setSearchText }) => {
+const Result = ({ name }) => {
+  const { setText } = useContext(SearchFormContext);
+
   const handleClick = () => {
-    setSearchText(name);
+    setText(name);
   };
 
   return (

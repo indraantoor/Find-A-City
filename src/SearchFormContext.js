@@ -34,25 +34,31 @@ const reducer = (state, action) => {
 export const SearchFormProvider = ({ children }) => {
   const [searchFormState, dispatch] = useReducer(reducer, initialState);
 
-  const placesSet = (data) => {
-    dispatch({
-      type: SET_PLACES,
-      payload: { places: data },
-    });
-  };
+  const placesSet = useCallback(
+    (data) => {
+      dispatch({
+        type: SET_PLACES,
+        payload: { places: data },
+      });
+    },
+    [dispatch]
+  );
 
-  const setText = (searchText) => {
-    dispatch({
-      type: SET_SEARCH_TEXT,
-      payload: {
-        searchText,
-      },
-    });
-  };
+  const setText = useCallback(
+    (searchText) => {
+      dispatch({
+        type: SET_SEARCH_TEXT,
+        payload: {
+          searchText,
+        },
+      });
+    },
+    [dispatch]
+  );
 
-  const clearText = () => {
+  const clearText = useCallback(() => {
     setText("");
-  };
+  }, [setText]);
 
   const value = { searchFormState, placesSet, setText, clearText };
 

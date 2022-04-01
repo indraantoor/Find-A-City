@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useContext, useEffect, useReducer, useState } from "react";
 import ResultsList from "../ResultsList";
 import SearchIcon from "../../Assets/SearchIcon";
 import ClearIcon from "../../Assets/ClearIcon";
@@ -10,6 +10,7 @@ import {
   SearchFormContainer,
   SearchInput,
 } from "./style";
+import { SearchFormContext } from "../../SearchFormContext";
 
 const initialState = {
   searchText: "",
@@ -62,36 +63,40 @@ const getPlaces = (debouncedSearchText, setFn) => {
 const SearchForm = () => {
   // const [places, setPlaces] = useState({});
   // const [searchText, setSearchText] = useState("");
-  const [searchFormState, dispatch] = useReducer(reducer, initialState);
+  // const [searchFormState, dispatch] = useReducer(reducer, initialState);
+  const { searchFormState, clearText, placesSet, setText } =
+    useContext(SearchFormContext);
   const debouncedSearchText = useDebounce(searchFormState.searchText, 180);
 
-  const placesSet = (data) => {
-    dispatch({
-      type: SET_PLACES,
-      payload: { places: data },
-    });
-  };
+  const testingState = useContext(SearchFormContext);
+
+  // const placesSet = (data) => {
+  //   dispatch({
+  //     type: SET_PLACES,
+  //     payload: { places: data },
+  //   });
+  // };
 
   useEffect(() => {
     getPlaces(debouncedSearchText, placesSet);
-  }, [debouncedSearchText]);
+  }, [debouncedSearchText, placesSet]);
 
   // useEffect(() => {
   //   placesSet(places);
   // }, [places]);
 
-  const setText = (searchText) => {
-    dispatch({
-      type: SET_SEARCH_TEXT,
-      payload: {
-        searchText,
-      },
-    });
-  };
+  // const setText = (searchText) => {
+  //   dispatch({
+  //     type: SET_SEARCH_TEXT,
+  //     payload: {
+  //       searchText,
+  //     },
+  //   });
+  // };
 
-  const clearText = () => {
-    setText("");
-  };
+  // const clearText = () => {
+  //   setText("");
+  // };
 
   const handleChange = (e) => {
     const updatedSearchText = e.target.value;
@@ -107,7 +112,8 @@ const SearchForm = () => {
   };
 
   console.log(searchFormState);
-
+  console.log("state -----------");
+  console.log(testingState);
   const isValidResult =
     searchFormState.searchText.length > 0 &&
     searchFormState.places.features &&
