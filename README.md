@@ -16,7 +16,7 @@ git clone https://github.com/indraantoor/Find-A-City.git
   npm install
 ```
 
-3. Create a ".env" (name it exactly like mentioned -> <b>.env</b>) file in Find A City Directory. Directory for the ".env" file will look like below.
+3. Create a ".env" (name it exactly like mentioned -> <b>.env</b>) file in Find A City Directory. The path for the ".env" file will look like below.
 
 ```sh
   Find A City/.env
