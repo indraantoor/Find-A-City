@@ -1,4 +1,4 @@
-import { useContext, useEffect, useReducer, useState } from "react";
+import { useContext, useEffect } from "react";
 import ResultsList from "../ResultsList";
 import SearchIcon from "../../Assets/SearchIcon";
 import ClearIcon from "../../Assets/ClearIcon";
